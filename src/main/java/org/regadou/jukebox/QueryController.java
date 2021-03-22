@@ -1,7 +1,6 @@
 package org.regadou.jukebox;
 
 import io.agroal.api.AgroalDataSource;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -23,17 +22,10 @@ import javax.ws.rs.core.MediaType;
 @Path("/query")
 public class QueryController {
 
-    private AgroalDataSource dataSource;
+    @Inject
+    AgroalDataSource dataSource;
     private Connection connection;
     private Statement statement;
-    private String database;
-
-    @Inject
-    public QueryController(AgroalDataSource dataSource, DataInitializer initializer) throws IOException {
-        this.dataSource = dataSource;
-        if (!initializer.isInitialized())
-            initializer.initialize();
-    }
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)

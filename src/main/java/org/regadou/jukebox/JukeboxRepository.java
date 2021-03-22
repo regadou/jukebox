@@ -20,7 +20,8 @@ public class JukeboxRepository implements PanacheRepository<Jukebox> {
             params.add(model);
             jpql += " where j.model = ?1";
         }
-        List<Jukebox> jukes = this.list(jpql+" order by j.id", params.toArray());
+        jpql += " order by j.id";
+        List<Jukebox> jukes = this.list(jpql, params.toArray());
         if (offset == null)
             offset = 0;
         if (limit == null)

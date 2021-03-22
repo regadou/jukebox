@@ -1,6 +1,8 @@
 package org.regadou.jukebox;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +17,13 @@ public class Setting extends PanacheEntityBase {
     @ManyToMany
     @JoinTable(name="setting_components_relation")
     private Set<JukeboxComponent> requires;
+    
+    public Setting() {}
+    
+    public Setting(String id, JukeboxComponent...requires) {
+        this.id = id;
+        this.requires = new LinkedHashSet<>(Arrays.asList(requires));
+    }
 
     public String getId() {
         return id;

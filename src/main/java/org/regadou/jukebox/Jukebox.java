@@ -1,6 +1,8 @@
 package org.regadou.jukebox;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +22,14 @@ public class Jukebox extends PanacheEntityBase {
     @JoinTable(name="jukebox_components_relation")
     private Set<JukeboxComponent> components;
 
+    public Jukebox() {}
+    
+    public Jukebox(String id, String model, JukeboxComponent...components) {
+        this.id = id;
+        this.model = model;
+        this.components = new LinkedHashSet<>(Arrays.asList(components));
+    }
+    
     public String getId() {
         return id;
     }

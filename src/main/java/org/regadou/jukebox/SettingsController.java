@@ -18,16 +18,10 @@ public class SettingsController {
 
     @Context
     HttpRequest request;
-    private SettingRepository settingRepo;
-    private JukeboxRepository jukeboxRepo;
-
     @Inject
-    public SettingsController(SettingRepository settingRepo, JukeboxRepository jukeboxRepo, DataInitializer initializer) throws IOException {
-        this.settingRepo = settingRepo;
-        this.jukeboxRepo = jukeboxRepo;
-        if (!initializer.isInitialized())
-            initializer.initialize();
-    }
+    SettingRepository settingRepo;
+    @Inject
+    JukeboxRepository jukeboxRepo;
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
